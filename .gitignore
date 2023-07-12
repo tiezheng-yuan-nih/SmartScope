@@ -44,4 +44,10 @@ Smartscope/server/api/migrations
 mydatabase
 SerialEM-python
 SmartScope-docs
+<<<<<<< HEAD
 data
+=======
+data
+>>>>>>> 8753630 (ignore files)
+Smartscope/.local.env
+>>>>>>> a2be342 (Cleaning up dev environment)
