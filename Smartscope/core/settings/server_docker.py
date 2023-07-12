@@ -14,12 +14,13 @@ import os
 # from django.core.files.storage import FileSystemStorage
 
 # Initialise environment variables
-if os.environ.get('mode') == 'dev':
+if  os.environ.get('mode') == 'dev':
     env = environ.Env()
     environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+print("###", BASE_DIR)
 
 AUTOSCREENDIR = os.getenv('AUTOSCREENDIR')
 AUTOSCREENING_URL = '/autoscreening/'
@@ -31,7 +32,7 @@ TEMPDIR = os.getenv('TEMPDIR')
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = eval(os.getenv('DEBUG'))
-DEPLOY = True
+DEPLOY = eval(os.getenv('DEPLOY'))
 
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
@@ -87,7 +88,10 @@ ROOT_URLCONF = 'Smartscope.server.main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '../server/main/custom_templates'), os.path.join(BASE_DIR, '../server/main/templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'server/main/custom_templates'),
+            os.path.join(BASE_DIR, 'server/main/templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,13 +128,10 @@ CACHES = {
 }
 
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv('MYSQL_DATABASE'),
-        'USER': os.getenv('MYSQL_USER'),
-        'PASSWORD': os.getenv('MYSQL_PASSWORD'),
         'HOST': os.environ.get("MYSQL_HOST"),
         'PORT': os.getenv('MYSQL_PORT'),
         'CONN_MAX_AGE': 0,
@@ -140,11 +141,12 @@ if os.getenv('MYSQL_HOST') == 'localhost':
     DATABASES['default']['OPTIONS'] = {
         'unix_socket': '/run/mysqld/mysqld.sock',
     }
-else:
     DATABASES['default']['USER'] = os.getenv('MYSQL_USER')
     DATABASES['default']['PASSWORD'] = os.getenv('MYSQL_PASSWORD')
-    DATABASES['default']['HOST'] = os.getenv('MYSQL_HOST')
-    DATABASES['default']['PORT'] = os.getenv('MYSQL_PORT')
+else:
+    DATABASES['default']['USER'] = os.getenv('MYSQL_ROOT_USER')
+    DATABASES['default']['PASSWORD'] = os.getenv('MYSQL_ROOT_PASSWORD')
+
 
     ssl = eval(os.getenv('MYSQL_SSL', 'False'))
     if ssl:
@@ -204,15 +206,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
 STATIC_URL = '/static/'
 
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "../static"),
-)
-
-# STATIC_ROOT = os.path.join(BASE_DIR, "../static/")
+if DEBUG is True:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "../static/"),
+    ]
+else:
+    # only used for prod
+    STATIC_ROOT = os.path.join(BASE_DIR, "../static/")
 
 LOGIN_REDIRECT_URL = '/smartscope'
 LOGOUT_REDIRECT_URL = '/login'
