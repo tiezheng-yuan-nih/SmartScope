@@ -31,17 +31,17 @@ docker-compose.yml.bak
 .config
 .python_history
 MyDocker/*
-<<<<<<< HEAD
+Smartscope/core/__pycache__
+Smartscope/mydatase
 .ipython
 .mysql_history
 .gitignore
 .ipython/profile_default/history.sqlite
-=======
 Smartscope/core/__pycache__
-<<<<<<< HEAD
 mydatase
->>>>>>> 3dba33f (dev)
-=======
 Smartscope/mydatase
 Smartscope/server/api/migrations
->>>>>>> 89f9db0 (env)
+mydatabase
+SerialEM-python
+SmartScope-docs
+data
