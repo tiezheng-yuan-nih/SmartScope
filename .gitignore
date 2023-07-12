@@ -31,7 +31,12 @@ docker-compose.yml.bak
 .config
 .python_history
 MyDocker/*
+<<<<<<< HEAD
 .ipython
 .mysql_history
 .gitignore
 .ipython/profile_default/history.sqlite
+=======
+Smartscope/core/__pycache__
+mydatase
+>>>>>>> 3dba33f (dev)
