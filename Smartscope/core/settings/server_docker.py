@@ -9,10 +9,14 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+import environ
 import os
 # from django.core.files.storage import FileSystemStorage
 
+# Initialise environment variables
+if os.environ.get('mode') == 'dev':
+    env = environ.Env()
+    environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,10 +31,14 @@ TEMPDIR = os.getenv('TEMPDIR')
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEBUG = eval(os.getenv('DEBUG'))
 =======
 DEBUG = os.getenv('DEBUG')
 >>>>>>> 3dba33f (dev)
+=======
+DEBUG = eval(os.getenv('DEBUG'))
+>>>>>>> 89f9db0 (env)
 DEPLOY = True
 
 
@@ -123,12 +131,22 @@ CACHES = {
     }
 }
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv('MYSQL_DATABASE'),
+<<<<<<< HEAD
         'PASSWORD': os.getenv('MYSQL_PASSWORD'),
 
+=======
+        'USER': os.environ.get("MYSQL_USER"),
+        'PASSWORD': os.getenv('MYSQL_USER_PASSWORD'),
+        'ROOT_PASSWORD': os.getenv('MYSQL_ROOT_PASSWORD'),
+        'HOST': os.environ.get("MYSQL_HOST"),
+        'PORT': os.getenv('MYSQL_PORT'),
+>>>>>>> 89f9db0 (env)
         'CONN_MAX_AGE': 0,
     }
 }

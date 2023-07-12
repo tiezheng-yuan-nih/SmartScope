@@ -5,8 +5,13 @@ import sys
 
 
 def main():
+<<<<<<< HEAD
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Smartscope.settings.server')
     # print(sys.argv)
+=======
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Smartscope.core.settings.server_docker')
+
+>>>>>>> 89f9db0 (env)
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

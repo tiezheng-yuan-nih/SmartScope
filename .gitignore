@@ -38,5 +38,10 @@ MyDocker/*
 .ipython/profile_default/history.sqlite
 =======
 Smartscope/core/__pycache__
+<<<<<<< HEAD
 mydatase
 >>>>>>> 3dba33f (dev)
+=======
+Smartscope/mydatase
+Smartscope/server/api/migrations
+>>>>>>> 89f9db0 (env)
